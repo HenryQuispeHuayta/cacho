@@ -66,7 +66,6 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               InkWell(
-                //   onPressed: sb1 ? null : lanzar, child: Text('Iniciar')),
                 onTap: sd1 ? null : dado1,
                 child: Image.asset(
                   'assets/imgs/$d1.png',
@@ -74,13 +73,14 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
               InkWell(
-                onTap: () {
-                  setState(() {
-                    d2 = 7 - d2;
-                    dados[2] = d2;
-                    calcular();
-                  });
-                },
+                onTap: sd2 ? null : dado2,
+                // onTap: () {
+                //   setState(() {
+                //     d2 = 7 - d2;
+                //     dados[2] = d2;
+                //     calcular();
+                //   });
+                // },
                 child: Image.asset(
                   'assets/imgs/$d2.png',
                   height: 120.0,
@@ -89,13 +89,14 @@ class _MyAppState extends State<MyApp> {
             ],
           ),
           InkWell(
-            onTap: () {
-              setState(() {
-                d3 = 7 - d3;
-                dados[3] = d3;
-                calcular();
-              });
-            },
+            onTap: sd3 ? null : dado3,
+            // onTap: () {
+            //   setState(() {
+            //     d3 = 7 - d3;
+            //     dados[3] = d3;
+            //     calcular();
+            //   });
+            // },
             child: Image.asset(
               'assets/imgs/$d3.png',
               height: 120.0,
@@ -105,26 +106,28 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               InkWell(
-                onTap: () {
-                  setState(() {
-                    d4 = 7 - d4;
-                    dados[4] = d4;
-                    calcular();
-                  });
-                },
+                onTap: sd4 ? null : dado4,
+                // onTap: () {
+                //   setState(() {
+                //     d4 = 7 - d4;
+                //     dados[4] = d4;
+                //     calcular();
+                //   });
+                // },
                 child: Image.asset(
                   'assets/imgs/$d4.png',
                   height: 120.0,
                 ),
               ),
               InkWell(
-                onTap: () {
-                  setState(() {
-                    d5 = 7 - d5;
-                    dados[5] = d5;
-                    calcular();
-                  });
-                },
+                onTap: sd5 ? null : dado5,
+                // onTap: () {
+                //   setState(() {
+                //     d5 = 7 - d5;
+                //     dados[5] = d5;
+                //     calcular();
+                //   });
+                // },
                 child: Image.asset(
                   'assets/imgs/$d5.png',
                   height: 120.0,
@@ -297,6 +300,7 @@ class _MyAppState extends State<MyApp> {
       calcular();
     });
   }
+
   dado2() {
     setState(() {
       d2 = 7 - d2;
@@ -304,6 +308,7 @@ class _MyAppState extends State<MyApp> {
       calcular();
     });
   }
+
   dado3() {
     setState(() {
       d3 = 7 - d3;
@@ -311,6 +316,7 @@ class _MyAppState extends State<MyApp> {
       calcular();
     });
   }
+
   dado4() {
     setState(() {
       d5 = 7 - d4;
@@ -318,6 +324,7 @@ class _MyAppState extends State<MyApp> {
       calcular();
     });
   }
+
   dado5() {
     setState(() {
       d5 = 7 - d5;
