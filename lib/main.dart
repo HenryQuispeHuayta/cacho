@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
   bool sb1 = false;
   bool sb2 = false;
 
-  late Timer timer;
+  Timer? timer;
   int _cont = 5;
 
   @override
@@ -90,13 +90,6 @@ class _MyAppState extends State<MyApp> {
           ),
           InkWell(
             onTap: sd3 ? null : dado3,
-            // onTap: () {
-            //   setState(() {
-            //     d3 = 7 - d3;
-            //     dados[3] = d3;
-            //     calcular();
-            //   });
-            // },
             child: Image.asset(
               'assets/imgs/$d3.png',
               height: 120.0,
@@ -107,13 +100,6 @@ class _MyAppState extends State<MyApp> {
             children: [
               InkWell(
                 onTap: sd4 ? null : dado4,
-                // onTap: () {
-                //   setState(() {
-                //     d4 = 7 - d4;
-                //     dados[4] = d4;
-                //     calcular();
-                //   });
-                // },
                 child: Image.asset(
                   'assets/imgs/$d4.png',
                   height: 120.0,
@@ -121,13 +107,6 @@ class _MyAppState extends State<MyApp> {
               ),
               InkWell(
                 onTap: sd5 ? null : dado5,
-                // onTap: () {
-                //   setState(() {
-                //     d5 = 7 - d5;
-                //     dados[5] = d5;
-                //     calcular();
-                //   });
-                // },
                 child: Image.asset(
                   'assets/imgs/$d5.png',
                   height: 120.0,
@@ -207,7 +186,7 @@ class _MyAppState extends State<MyApp> {
       sd4 = false;
       sd5 = false;
 
-      timer.cancel();
+      timer?.cancel();
       calcular();
       _contador();
     });
@@ -319,7 +298,7 @@ class _MyAppState extends State<MyApp> {
 
   dado4() {
     setState(() {
-      d5 = 7 - d4;
+      d4 = 7 - d4;
       dados[4] = d4;
       calcular();
     });
