@@ -21,11 +21,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   List<int> dados = [];
 
-  int d1 = 1;
-  int d2 = 1;
-  int d3 = 1;
-  int d4 = 1;
-  int d5 = 1;
+  int d1 = 0;
+  int d2 = 0;
+  int d3 = 0;
+  int d4 = 0;
+  int d5 = 0;
 
   String R = 'COMENZEMOS';
 
@@ -38,7 +38,12 @@ class _MyAppState extends State<MyApp> {
   bool sb2 = false;
 
   Timer? timer;
-  int _cont = 5;
+  int cont = 5;
+
+  String inicio = '';
+  String fin = '';
+
+  bool sw = true;
 
   @override
   Widget build(BuildContext context) {
@@ -46,17 +51,17 @@ class _MyAppState extends State<MyApp> {
       child: Column(
         children: [
           SizedBox(
-            height: 10.0,
+            height: 5.0,
           ),
           Text(
             'Henry Quispe Huayta',
             style: TextStyle(fontSize: 30),
           ),
           SizedBox(
-            height: 20.0,
+            height: 10.0,
           ),
           Text(
-            '$_cont',
+            inicio,
             style: TextStyle(fontSize: 30),
           ),
           SizedBox(
@@ -118,33 +123,70 @@ class _MyAppState extends State<MyApp> {
             height: 10.0,
           ),
           Text(
+            fin,
+            style: TextStyle(fontSize: 30),
+          ),
+          Text(
             R,
             style: TextStyle(fontSize: 30),
           ),
-          Row(
-            children: [
-              SizedBox(
-                width: 20.0,
-              ),
-              Expanded(
-                child: ElevatedButton(
-                    onPressed: sb1 ? null : lanzar, child: Text('Iniciar')),
-              ),
-              SizedBox(
-                width: 20.0,
-              ),
-              Expanded(
-                child: ElevatedButton(
-                    onPressed: sb2 ? null : reinciar, child: Text('Reiniciar')),
-              ),
-              SizedBox(
-                width: 20.0,
-              ),
-            ],
-          ),
+          cambiar(),
         ],
       ),
     );
+  }
+
+  Widget cambiar() {
+    if (sw) {
+      return Row(
+        children: [
+          Expanded(
+            child: ElevatedButton(
+              onPressed: () {
+                reinciar();
+              },
+              child: Text('INICIAR PARTIDA'),
+            ),
+          ),
+        ],
+      );
+    }
+    if (!sw && cont > 0) {
+      contador();
+      return Text(
+        '$cont',
+        style: TextStyle(fontSize: 30),
+      );
+    } else {
+      return Row(
+        children: [
+          SizedBox(
+            width: 20.0,
+          ),
+          Expanded(
+            child: ElevatedButton(
+                onPressed: sb1 ? null : lanzar, child: Text('LANZAR')),
+          ),
+          SizedBox(
+            width: 20.0,
+          ),
+          Expanded(
+            child: ElevatedButton(
+                onPressed: sb2 ? null : finalizar, child: Text('FINALIZAR')),
+          ),
+          SizedBox(
+            width: 20.0,
+          ),
+        ],
+      );
+    }
+  }
+
+  finalizar() {
+    setState(() {
+      horaFin();
+      sw = true;
+    });
   }
 
   reinciar() {
@@ -155,20 +197,28 @@ class _MyAppState extends State<MyApp> {
       sd4 = false;
       sd5 = false;
 
-      d1 = 1;
-      d2 = 1;
-      d3 = 1;
-      d4 = 1;
-      d5 = 1;
+      d1 = 0;
+      d2 = 0;
+      d3 = 0;
+      d4 = 0;
+      d5 = 0;
+
       sb1 = false;
       sb2 = true;
+
       R = 'COMENZEMOS';
-      _cont = 5;
+
+      inicio = '';
+      fin = '';
+      cont = 5;
+
+      sw = false;
     });
   }
 
   lanzar() {
     setState(() {
+      horaInicio();
       d1 = Random().nextInt(6) + 1;
       d2 = Random().nextInt(6) + 1;
       d3 = Random().nextInt(6) + 1;
@@ -188,27 +238,17 @@ class _MyAppState extends State<MyApp> {
 
       timer?.cancel();
       calcular();
-      _contador();
+      // contador();
     });
   }
 
-  _contador() {
+  contador() {
     timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
-        if (_cont > 0 &&
-            sd1 == false &&
-            sd2 == false &&
-            sd3 == false &&
-            sd4 == false &&
-            sd5 == false) {
-          _cont--;
+        if (cont > 0) {
+          cont--;
         } else {
           timer.cancel();
-          sd1 = true;
-          sd2 = true;
-          sd3 = true;
-          sd4 = true;
-          sd5 = true;
         }
       });
     });
@@ -259,16 +299,62 @@ class _MyAppState extends State<MyApp> {
         }
       }
       if (l == 1) {
-        bool ct = true;
-        for (int i = 1; i < dados.length - 1; i++) {
-          if (dados[i] == dados[i + 1]) {
-            ct = false;
+        int c1 = 0;
+        int c2 = 3;
+        for (int i = 1; i < dados.length; i++) {
+          for (int j = 1; j < dados.length; j++) {
+            if (dados[j] == i) {
+              c1++;
+            }
+            if (dados[j] == c2) {
+              c2++;
+            }
           }
         }
-        if (ct) {
+        if (c1 == 5 || c2 == 7) {
           R = 'ESCALERA';
+        } else {
+          R = 'SIGA PARTICIPANDO';
         }
+
+        // List<int> dadosE = [0, 1, 2, 3, 4, 5];
+        // bool ct = true;
+        // for (int i = 1; i < dados.length - 1; i++) {
+        //   if (dados[i] == dados[i + 1]) {
+        //     ct = false;
+        //   }
+        // }
+        // if (ct) {
+        //   R = 'ESCALERA';
+        // }
+        // if (dados == dadosE || dados[2] == 3) {
+        //   for(int i=3;i<dados.length;i++){
+
+        //   }
+        // }
       }
+    });
+  }
+
+  horaInicio() {
+    setState(() {
+      DateTime now = DateTime.now();
+      inicio = now.hour.toString() +
+          ':' +
+          now.minute.toString() +
+          ':' +
+          now.second.toString();
+    });
+  }
+
+  horaFin() {
+    setState(() {
+      DateTime now = DateTime.now();
+      fin = now.hour.toString() +
+          ':' +
+          now.minute.toString() +
+          ':' +
+          now.second.toString();
     });
   }
 
