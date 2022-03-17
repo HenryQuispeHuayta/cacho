@@ -213,12 +213,13 @@ class _MyAppState extends State<MyApp> {
       cont = 5;
 
       sw = false;
+
+      horaInicio();
     });
   }
 
   lanzar() {
     setState(() {
-      horaInicio();
       d1 = Random().nextInt(6) + 1;
       d2 = Random().nextInt(6) + 1;
       d3 = Random().nextInt(6) + 1;
